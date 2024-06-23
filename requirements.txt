@@ -1,0 +1,8 @@
+aiogram <2.9
+aiohttp
+asyncio
+requests
+psycopg2-binary
+aiohttp_cors
+aiohttp_middlewares
+pillow
