@@ -26,14 +26,16 @@ def create_title():
     return title
 
 async def receive_data(request):
-    response = {'result': 'success'}
+    # response = {'result': 'success'}
     try:
         handler = asyncio.create_task(handle_data(request))
-        await handler
+        response = await handler
     except json.JSONDecodeError:
-        response['result'] = 'failed_get_json'
+        response = {'result': 'failed_get_json'}
+        # response['result'] = 'failed_get_json'
 
-    return web.json_response({'status': 'success'})
+    # return web.json_response({'status': 'success'})
+    return response
 
 async def run_command(cmd):
     process = await asyncio.create_subprocess_shell(
@@ -75,6 +77,7 @@ async def handle_data(request):
     print(d - c)
 
     await aiogramHandler.send_pic(hash_id, path_to_osm, path_to_pic)
+    return web.json_response({'result': 'success'})
 
 async def start():
     app = web.Application()
